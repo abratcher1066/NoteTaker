@@ -6,10 +6,19 @@
 const Port = 8080;
 const fs = require('fs');
 
+// adding express stuff and setting up that
+const express = require("express");
+const path = require("path");
+const app = express();
+// h    
+const data = fs.readFileSync("db.json")
+const notes1 = JSON.parse(data)
 
 
 
-
+app.use(express.urlencoded({extended: true}))
+app.use(express.static(path.join(__dirname,   )))
+app.use(express.json())
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // Create an application that can be used to write, save, and delete notes. This application will use an express backend 
@@ -22,6 +31,19 @@ const fs = require('fs');
     // GET `*` - Should return the `index.html` file
 
         // html routes code here
+
+
+app.get("*",function(req,res) {
+    res.sendFile(path.join(__dirname, "index.html"))
+})
+
+app.get(" ", function(req, res) {
+    res.sendFile(path.join(__dirname, "  "))  //fill in with file
+})
+
+app.get("/api/notes", function(req, res){
+    res.sendFile(path.join(__dirname, " "))
+})
 
 
 // The application should have a `db.json` file on the backend that will be used to store and retrieve notes using the `fs` module.
